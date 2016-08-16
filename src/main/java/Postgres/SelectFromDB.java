@@ -1,6 +1,5 @@
 package Postgres;
 
-import Postgres.Constants.PostgresStage;
 import Postgres.Entity.Domains;
 
 import java.sql.ResultSet;
@@ -13,6 +12,11 @@ import java.util.List;
  * Created by adyachenko on 15.08.16.
  */
 public class SelectFromDB {
+    public static Statement statement() throws SQLException {
+        Statement statement = new GetPostgresConn().connectToProd().createStatement();
+        return statement;
+    }
+
     public static List<Domains> getAllDomains(Statement statement) throws SQLException {
         ResultSet rs = statement.executeQuery("SELECT * FROM " + Domains.TABLE + ";");
         List<Domains> ret = new ArrayList<Domains>();
@@ -51,10 +55,10 @@ public class SelectFromDB {
 
     public static void main(String[] args) throws SQLException {
         GetPostgresConn conn = new GetPostgresConn();
-        Statement statement = conn.stmt(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
+//        Statement statement = conn.stmt(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
 //        System.out.println(getAllDomains(statement));
-        System.out.println(getByDomains(statement, "acmeroborent.com"));
-        statement.close();
+        System.out.println(getByDomains(statement(), "acmeroborent.com"));
+        statement().close();
 
 
     }

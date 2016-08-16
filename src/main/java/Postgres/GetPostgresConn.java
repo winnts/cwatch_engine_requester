@@ -1,15 +1,17 @@
 package Postgres;
 
+import Postgres.Constants.PostgresProd;
+import Postgres.Constants.PostgresStage;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by adyachenko on 15.08.16.
  */
 public class GetPostgresConn {
-    public Connection connect (String db_addr, String db_port, String db_name, String user, String pass) {
+
+    public Connection connect(String db_addr, String db_port, String db_name, String user, String pass) {
         Connection postgresConn = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -23,8 +25,16 @@ public class GetPostgresConn {
         return postgresConn;
     }
 
-    public Statement stmt (String db_addr, String db_port, String db_name, String user, String pass) throws SQLException {
-        return connect(db_addr, db_port, db_name, user, pass).createStatement();
+//    public Statement stmt() throws SQLException {
+//        return connect().createStatement();
+//    }
+
+    public Connection connectToProd () {
+        return connect(PostgresProd.db_addr, PostgresProd.db_port, PostgresProd.db_name, PostgresProd.user, PostgresProd.pass);
     }
+    public Connection connectToStage () {
+        return connect(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
+    }
+
 
 }
