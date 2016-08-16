@@ -1,5 +1,6 @@
 package Postgres;
 
+import Postgres.Constants.PostgresProd;
 import Postgres.Constants.PostgresStage;
 import Postgres.Entity.Reports;
 import org.json.JSONArray;
@@ -69,7 +70,27 @@ public class GetReports {
         ResultSet rs = statement.executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_MALWARE_DETECTED + "=TRUE;");
         return collectFields(rs);
     }
-
+    public static void getMalware (Statement statement) {
+        String domainName;
+        JSONArray malware;
+        System.out.println("################# MALWARE REPORT ####################");
+        try {
+            for (Reports reports : requestMalware(statement)) {
+                JSONObject reputation = new JSONObject(reports.getFieldMalwareDescription);
+                System.out.println(reports.getFieldMalwareDescription);
+                domainName = reputation.getString("domain");
+                System.out.println("DOMAIN: " + domainName);
+                malware = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
+                for (Object files : malware) {
+                    JSONObject file = new JSONObject(files.toString());
+                    System.out.println("FILE: " + file.getString("path") + " Perms: " + file.getString("perms"));
+                }
+                System.out.println("##########################################");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static List<Reports> requestPhishing (Statement statement) throws SQLException {
         ResultSet rs = statement.executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_PHISHING_DETECTED + "=TRUE;");
@@ -130,7 +151,7 @@ public class GetReports {
     public static void getInsecurePerms (Statement statement) {
         String domainName;
         JSONArray malware;
-        System.out.println("################# MALWARE REPORT ####################");
+        System.out.println("################# INSECURE PERMISSIONS REPORT ####################");
         try {
             for (Reports reports : requestIsecurePerms(statement)) {
                 JSONObject reputation = new JSONObject(reports.getFieldMalwareDescription);
@@ -152,7 +173,7 @@ public class GetReports {
 
     public static void main(String[] args) throws SQLException {
         GetPostgresConn conn = new GetPostgresConn();
-        Statement statement = conn.stmt(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
+        Statement statement = conn.stmt(PostgresProd.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
 //        getSSLIssues(statement);
 //        getMalware(statement);
 //        getPhishing(statement);
