@@ -1,5 +1,6 @@
 package Postgres;
 
+import Postgres.Constants.PostgresStage;
 import Postgres.Entity.Domains;
 
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class SelectFromDB {
 
     public static void main(String[] args) throws SQLException {
         GetPostgresConn conn = new GetPostgresConn();
-        Statement statement = conn.stmt();
+        Statement statement = conn.stmt(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
 //        System.out.println(getAllDomains(statement));
         System.out.println(getByDomains(statement, "acmeroborent.com"));
         statement.close();

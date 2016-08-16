@@ -9,12 +9,12 @@ import java.sql.Statement;
  * Created by adyachenko on 15.08.16.
  */
 public class GetPostgresConn {
-    public Connection connect () {
+    public Connection connect (String db_addr, String db_port, String db_name, String user, String pass) {
         Connection postgresConn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            postgresConn = DriverManager.getConnection("jdbc:postgresql://10.8.3.90:5432/cwatch_production",
-                    "pguser", "password");
+            postgresConn = DriverManager.getConnection("jdbc:postgresql://"+db_addr+":"+db_port+"/"+db_name,
+                    user, pass);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -23,8 +23,8 @@ public class GetPostgresConn {
         return postgresConn;
     }
 
-    public Statement stmt () throws SQLException {
-        return connect().createStatement();
+    public Statement stmt (String db_addr, String db_port, String db_name, String user, String pass) throws SQLException {
+        return connect(db_addr, db_port, db_name, user, pass).createStatement();
     }
 
 }

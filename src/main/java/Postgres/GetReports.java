@@ -1,5 +1,6 @@
 package Postgres;
 
+import Postgres.Constants.PostgresStage;
 import Postgres.Entity.Reports;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -151,7 +152,7 @@ public class GetReports {
 
     public static void main(String[] args) throws SQLException {
         GetPostgresConn conn = new GetPostgresConn();
-        Statement statement = conn.stmt();
+        Statement statement = conn.stmt(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
 //        getSSLIssues(statement);
 //        getMalware(statement);
 //        getPhishing(statement);
