@@ -3,14 +3,14 @@ package Postgres;
 import Postgres.Entity.Domains;
 import Postgres.Entity.Reports;
 import Postgres.Reports.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Postgres.Constants.DbConst.*;
 
 /**
  * Created by adyachenko on 16.08.16.
@@ -44,17 +44,19 @@ public class GetReports {
     }
 
     public static List<Reports> requestAllReports() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestSSLIssues() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_SSL_ISSUES + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_SSL_ISSUES + "=" + isTrue + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestSSLIssues(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -77,12 +79,14 @@ public class GetReports {
 //    }
 
     public static List<Reports> requestMalware() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_MALWARE_DETECTED + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_MALWARE_DETECTED + "=" + isTrue + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestMalware(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -109,12 +113,14 @@ public class GetReports {
 //    }
 
     public static List<Reports> requestPhishing() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_PHISHING_DETECTED + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_PHISHING_DETECTED + "=" + isTrue + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestPhishing(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -137,12 +143,14 @@ public class GetReports {
 //    }
 
     public static List<Reports> requestBlacklisted() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_IS_BLACKLISTED + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE + 
+                where + Reports.FIELD_IS_BLACKLISTED + "=" + isTrue +";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestBlacklisted(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -165,12 +173,14 @@ public class GetReports {
 //    }
 
     public static List<Reports> requestInjected() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_INJECTED_CODE_FOUND + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_INJECTED_CODE_FOUND + "=" + isTrue + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestInjected(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -198,12 +208,14 @@ public class GetReports {
 
 
     public static List<Reports> requestIsecurePerms() throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_INSECURE_PERMISSIONS + "=TRUE;");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_INSECURE_PERMISSIONS + "=" + isTrue + ";");
         return collectFields(rs);
     }
 
     public static List<Reports> requestIsecurePerms(Integer id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_DOMAIN_ID + "=" + id + ";");
         return collectFields(rs);
     }
 
@@ -230,7 +242,8 @@ public class GetReports {
 //    }
 
     public static List<Reports> requestReportByDomainId(Integer domain_id) throws SQLException {
-        ResultSet rs = statement().executeQuery("SELECT * FROM " + Reports.TABLE + " WHERE " + Reports.FIELD_DOMAIN_ID + "=" + domain_id + ";");
+        ResultSet rs = statement().executeQuery(selectAll + Reports.TABLE +
+                where + Reports.FIELD_DOMAIN_ID + "=" + domain_id + ";");
         return collectFields(rs);
     }
 
@@ -253,7 +266,8 @@ public class GetReports {
 
     public static Integer getReportByDomain(String domain) throws SQLException {
         Integer domain_id = null;
-        ResultSet rs = statement().executeQuery("SELECT id FROM " + Domains.TABLE + " WHERE " + Domains.FIELD_DOMAIN + "='" + domain + "';");
+        ResultSet rs = statement().executeQuery("SELECT id FROM " + Domains.TABLE +
+                where + Domains.FIELD_DOMAIN + "='" + domain + "';");
         while (rs.next()) {
             domain_id = rs.getInt("id");
         }
