@@ -147,8 +147,9 @@ public class GetReports {
         InjectedReport.getInjected(requestInjected(292)); //Get Injected Report By Domain ID
         getFullReportByDomainName("gumblar.cn"); //Get Full Report By Domain Name
 */
-        MalwareReport.getMalware(requestMalware());
-        InjectedReport.getInjected(requestInjected());
-        GetPostgresConn.statement().close();
+//        MalwareReport.getMalware(requestMalware());
+//        InjectedReport.getInjected(requestInjected());
+//        GetPostgresConn.statement().close();
+        InsecurePermsReport.getInsecurePerms(requestIsecurePerms());
     }
 }

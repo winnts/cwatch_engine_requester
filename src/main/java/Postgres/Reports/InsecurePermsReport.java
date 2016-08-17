@@ -13,15 +13,24 @@ import java.util.List;
 public class InsecurePermsReport {
     public static void getInsecurePerms(List<Reports> reportsList) {
         String domainName;
-        JSONArray malware;
+        JSONArray suspicious;
+        JSONArray malicious;
         System.out.println("################# INSECURE PERMISSIONS REPORT ####################");
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldMalwareDescription);
+            System.out.println(reputation.toString());
             try {
                 domainName = reputation.getString("domain");
                 System.out.println("DOMAIN: " + domainName);
-                malware = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
-                for (Object files : malware) {
+                System.out.println("SUSPICIOUS FILES:");
+                suspicious = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
+                for (Object files : suspicious) {
+                    JSONObject file = new JSONObject(files.toString());
+                    System.out.println("FILE: " + file.getString("path") + "           Perms: " + file.getString("perms"));
+                }
+                System.out.println("MALICIOUS FILES:");
+                malicious = reputation.getJSONObject("scanned_files_malicious").getJSONArray("files");
+                for (Object files : malicious) {
                     JSONObject file = new JSONObject(files.toString());
                     System.out.println("FILE: " + file.getString("path") + "           Perms: " + file.getString("perms"));
                 }
