@@ -15,6 +15,11 @@ import static Postgres.Constants.DbConst.where;
  * Created by adyachenko on 17.08.16.
  */
 public class GetLicenses {
+
+    public static String LICENSE_FREE = "capt.domain_free.free";
+    public static String LICENSE_PROTECTED = "capt.domain_protected";
+    public static String LICENSE_FULLY_MANAGEMENT = "capt.domainfully.management";
+
     public static List<Licenses> collectFields(ResultSet rs) throws SQLException {
         List<Licenses> ret = new ArrayList<Licenses>();
         while (rs.next()) {
@@ -47,6 +52,6 @@ public class GetLicenses {
     }
 
     public static void main(String[] args) throws SQLException {
-        LicensesByType.getLicensesByType(requestLicensesByType("capt.domain_free.free"));
+        LicensesByType.getLicensesByType(requestLicensesByType(LICENSE_FREE));
     }
 }
