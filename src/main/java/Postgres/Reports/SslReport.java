@@ -14,6 +14,7 @@ public class SslReport {
         String domainName;
         String sslIssue;
         System.out.println("################# SSL REPORT ####################");
+        System.out.println(reportsList);
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldReputationDescription);
             try {

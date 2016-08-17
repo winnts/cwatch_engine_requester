@@ -15,8 +15,6 @@ public class InsecurePermsReport {
         String domainName;
         JSONArray suspicious;
         JSONArray malicious;
-        Integer suspicious_count = 0;
-        Integer malicious_count = 0;
         System.out.println("################# INSECURE PERMISSIONS REPORT ####################");
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldMalwareDescription);
@@ -25,22 +23,22 @@ public class InsecurePermsReport {
                 System.out.println("DOMAIN: " + domainName);
                 System.out.println("SUSPICIOUS FILES:");
                 suspicious = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
+                Integer suspicious_count = 0;
                 for (Object files : suspicious) {
                     JSONObject file = new JSONObject(files.toString());
                     System.out.println("FILE: " + file.getString("path") + "           Perms: " + file.getString("perms"));
                     suspicious_count ++;
                 }
                 System.out.println("Suspicious files found: " + suspicious_count);
-                suspicious_count = 0;
                 System.out.println("MALICIOUS FILES:");
                 malicious = reputation.getJSONObject("scanned_files_malicious").getJSONArray("files");
+                Integer malicious_count = 0;
                 for (Object files : malicious) {
                     JSONObject file = new JSONObject(files.toString());
                     System.out.println("FILE: " + file.getString("path") + "           Perms: " + file.getString("perms"));
                     malicious_count ++;
                 }
                 System.out.println("Malicious files found: " + malicious_count);
-                malicious_count =0;
                 System.out.println("##########################################");
             } catch (JSONException e){}
         }
