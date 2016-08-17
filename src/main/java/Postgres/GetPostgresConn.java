@@ -5,13 +5,15 @@ import Postgres.Constants.PostgresStage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by adyachenko on 15.08.16.
  */
 public class GetPostgresConn {
 
-    public Connection connect(String db_addr, String db_port, String db_name, String user, String pass) {
+    public static Connection connect(String db_addr, String db_port, String db_name, String user, String pass) {
         Connection postgresConn = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -29,12 +31,16 @@ public class GetPostgresConn {
 //        return connect().createStatement();
 //    }
 
-    public Connection connectToProd () {
+    public static Connection connectToProd () {
         return connect(PostgresProd.db_addr, PostgresProd.db_port, PostgresProd.db_name, PostgresProd.user, PostgresProd.pass);
     }
-    public Connection connectToStage () {
+    public static Connection connectToStage () {
         return connect(PostgresStage.db_addr, PostgresStage.db_port, PostgresStage.db_name, PostgresStage.user, PostgresStage.pass);
     }
 
+    public static Statement statement() throws SQLException {
+        Statement statement = connectToStage().createStatement();
+        return statement;
+    }
 
 }

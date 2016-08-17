@@ -1,9 +1,9 @@
 package Postgres.Reports;
 
 import Postgres.Entity.Reports;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,11 +16,13 @@ public class SslReport {
         System.out.println("################# SSL REPORT ####################");
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldReputationDescription);
-            domainName = reputation.getString("domain");
-            System.out.println("DOMAIN: " + domainName);
-            sslIssue = reputation.getJSONObject("ssl_details").getJSONObject("ssl_issues").getString("details");
-            System.out.println("SSL_ISSUE: " + sslIssue);
-            System.out.println("##########################################");
+            try {
+                domainName = reputation.getString("domain");
+                System.out.println("DOMAIN: " + domainName);
+                sslIssue = reputation.getJSONObject("ssl_details").getJSONObject("ssl_issues").getString("details");
+                System.out.println("SSL_ISSUE: " + sslIssue);
+                System.out.println("##########################################");
+            } catch (JSONException e) {}
         }
     }
 }

@@ -2,9 +2,9 @@ package Postgres.Reports;
 
 import Postgres.Entity.Reports;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,14 +17,17 @@ public class InjectedReport {
         System.out.println("################# INJECTED CODE REPORT ####################");
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldMalwareDescription);
-            domainName = reputation.getString("domain");
-            System.out.println("DOMAIN: " + domainName);
-            malware = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
-            for (Object files : malware) {
-                JSONObject file = new JSONObject(files.toString());
-                System.out.println("FILE: " + file.getString("path") + "           Detected by: " + file.getString("detected_by"));
+            try {
+                domainName = reputation.getString("domain");
+                System.out.println("DOMAIN: " + domainName);
+                malware = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
+                for (Object files : malware) {
+                    JSONObject file = new JSONObject(files.toString());
+                    System.out.println("FILE: " + file.getString("path") + "           Detected by: " + file.getString("detected_by"));
+                }
+                System.out.println("##########################################");
+            } catch (JSONException e) {
             }
-            System.out.println("##########################################");
         }
     }
 }

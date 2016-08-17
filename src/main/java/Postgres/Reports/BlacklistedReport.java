@@ -1,9 +1,9 @@
 package Postgres.Reports;
 
 import Postgres.Entity.Reports;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,11 +16,13 @@ public class BlacklistedReport {
         System.out.println("################# BLACKLISTED REPORT ####################");
         for (Reports reports : reportsList) {
             JSONObject reputation = new JSONObject(reports.getFieldReputationDescription);
-            domainName = reputation.getString("domain");
-            System.out.println("DOMAIN: " + domainName);
-            System.out.println("Comodo Webinspector : " + reputation.getJSONObject("blacklisted_details").getJSONObject("comodo_webinspector").getBoolean("hit"));
-            System.out.println("GSB : " + reputation.getJSONObject("blacklisted_details").getJSONObject("gsb").getBoolean("hit"));
-            System.out.println("##########################################");
+            try {
+                domainName = reputation.getString("domain");
+                System.out.println("DOMAIN: " + domainName);
+                System.out.println("Comodo Webinspector : " + reputation.getJSONObject("blacklisted_details").getJSONObject("comodo_webinspector").getBoolean("hit"));
+                System.out.println("GSB : " + reputation.getJSONObject("blacklisted_details").getJSONObject("gsb").getBoolean("hit"));
+                System.out.println("##########################################");
+            } catch (JSONException e) {}
         }
     }
 }
