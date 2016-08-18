@@ -1,7 +1,7 @@
 package Postgres;
 
 import Postgres.Entity.Licenses;
-import Postgres.Reports.LicensesByType;
+import Postgres.Reports.LicensesAll;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +40,7 @@ public class GetLicenses {
         return ret;
     }
 
+
     public static List<Licenses> requestAllLicenses() throws SQLException{
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Licenses.TABLE + ";");
         return collectFields(rs);
@@ -51,7 +52,15 @@ public class GetLicenses {
         return collectFields(rs);
     }
 
+    public static List<Licenses> requestLicensesById(Integer id) throws SQLException{
+        ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Licenses.TABLE +
+                where + Licenses.FIELD_ID + "=" + id +";");
+        return collectFields(rs);
+    }
+
     public static void main(String[] args) throws SQLException {
-        LicensesByType.getLicensesByType(requestLicensesByType(LICENSE_FREE));
+//        LicensesByType.getLicensesByType(requestLicensesByType(LICENSE_FREE));
+        LicensesAll.getLicensesAll(requestAllLicenses());
+
     }
 }

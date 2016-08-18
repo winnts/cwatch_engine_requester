@@ -1,11 +1,15 @@
 package Postgres;
 
 import Postgres.Entity.LicensesPermits;
+import Postgres.Reports.LicensesAndDomains;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Postgres.Constants.DbConst.selectAll;
+import static Postgres.Constants.DbConst.where;
 
 /**
  * Created by adyachenko on 17.08.16.
@@ -25,5 +29,21 @@ public class GetLicensesPermits {
             ret.add(reports);
         }
         return ret;
+    }
+
+    public static List<LicensesPermits> requestLicensesByDomainID (Integer domain) throws SQLException{
+        ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + LicensesPermits.TABLE +
+                where + LicensesPermits.FIELD_CLIENTABLE_ID + "=" + domain +";");
+        return collectFields(rs);
+    }
+
+    public static List<LicensesPermits> requestLicensesPerDomain() throws SQLException{
+        ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + LicensesPermits.TABLE +
+                where + LicensesPermits.FIELD_CLIENTABLE_TYPE + "=" + "\'Domain\'" +";");
+        return collectFields(rs);
+    }
+
+    public static void main(String[] args) throws SQLException {
+        LicensesAndDomains.getLicensesAll(requestLicensesPerDomain());
     }
 }
