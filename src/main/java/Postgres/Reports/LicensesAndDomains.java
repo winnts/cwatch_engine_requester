@@ -14,7 +14,6 @@ import java.util.List;
 public class LicensesAndDomains {
     public static void getLicensesAll(List<LicensesPermits> licensesPermitsList) throws SQLException {
         System.out.println("################# LICENSES PER DOMAINS REPORT ####################");
-        System.out.println(licensesPermitsList.toString());
         for (LicensesPermits licensesPermits : licensesPermitsList) {
             List<Licenses> licenses = GetLicenses.requestLicensesById(licensesPermits.getFieldLicenseId);
             for (Licenses license : licenses) {
