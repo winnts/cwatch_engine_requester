@@ -18,7 +18,8 @@ public class LicensesAndDomains {
             List<Licenses> licenses = GetLicenses.requestLicensesById(licensesPermits.getFieldLicenseId);
             for (Licenses license : licenses) {
                 System.out.println("Domain: " + GetDomains.getDomainNameById(licensesPermits.getFieldClientableId) +
-                        "    License Key: " + license.getFieldKey + "     Product: " + license.getFieldProduct);
+                        "    License Key: " + license.getFieldKey + "     Product: " + license.getFieldProduct +
+                        "    License status: " + license.getFieldLicenseStatusId + "     Expired At: " + license.getFieldExpiredAt);
             }
         }
         System.out.println("################# ####################### ####################");
