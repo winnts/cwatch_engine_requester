@@ -54,7 +54,7 @@ public class GetLicenses {
 
     public static List<Licenses> requestLicensesById(Integer id) throws SQLException{
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Licenses.TABLE +
-                where + Licenses.FIELD_ID + "=" + id +";");
+                where + Licenses.FIELD_ID + "=" + id + ";");
         return collectFields(rs);
     }
 

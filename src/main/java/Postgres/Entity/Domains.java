@@ -14,7 +14,7 @@ public class Domains {
     public static final String FIELD_IP = "ip";
     public static final String FIELD_SUSPENDTIME = "suspendtime";
     public static final String FIELD_IS_LOCKED = "is_locked";
-    public static final String FIELD_SUSPENDREASON = "suspendreason";
+    public static final String FIELD_SUSPENDREASON = "suspendreaason";
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_DOMAIN = "domain";
     public static final String FIELD_SUSPENDED = "suspended";

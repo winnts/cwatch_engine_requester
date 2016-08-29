@@ -153,5 +153,6 @@ public class GetReports {
         InsecurePermsReport.getInsecurePerms(requestIsecurePerms());
 //        getFullReportByDomainName("gumblar.cn");
 //        SslReport.getSSLIssues(requestSSLIssues());
+
     }
 }

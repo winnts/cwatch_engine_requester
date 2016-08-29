@@ -75,7 +75,7 @@ public class GetDomains {
     public static String getDomainNameById (Integer id) throws SQLException {
         String domain_name = "";
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Domains.TABLE +
-                where + Domains.FIELD_ID + "=" + id + ";");
+                where + Domains.FIELD_ID + "=" + id +";");
         while (rs.next()) {
             domain_name = rs.getString("domain");
         }
@@ -83,7 +83,8 @@ public class GetDomains {
     }
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(getByDomains("acmeroborent.com"));
+//        System.out.println(getDomainNameById(1023));
+        System.out.println(getAllDomains());
         GetPostgresConn.statement().close();
     }
 }
