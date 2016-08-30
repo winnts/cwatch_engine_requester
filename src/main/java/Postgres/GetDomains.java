@@ -52,16 +52,16 @@ public class GetDomains {
         return ret;
     }
 
-    public static List<Domains> getAllDomains() throws SQLException {
+    public static List<Domains> getDomain() throws SQLException {
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Domains.TABLE + ";");
         return collectFields(rs);
-
     }
 
-    public static List<Domains> getByDomains(String domain) throws SQLException {
+    public static List<Domains> getDomain(String domain) throws SQLException {
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + Domains.TABLE + where + Domains.FIELD_DOMAIN + "=\'" + domain + "\';");
         return collectFields(rs);
     }
+
     public static Integer getDomainIdByName (String domain) throws SQLException {
         Integer domain_id = null;
         ResultSet rs = GetPostgresConn.statement().executeQuery(selectId + Domains.TABLE +
@@ -84,7 +84,7 @@ public class GetDomains {
 
     public static void main(String[] args) throws SQLException {
 //        System.out.println(getDomainNameById(1023));
-        System.out.println(getAllDomains());
+        System.out.println(getDomain());
         GetPostgresConn.statement().close();
     }
 }

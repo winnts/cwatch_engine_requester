@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by adyachenko on 29.08.16.
  */
-@Path("/hello")
+@Path("/domains")
 @Produces(MediaType.APPLICATION_JSON)
 public class MonitorAppResource {
     private final String template;
@@ -30,10 +30,10 @@ public class MonitorAppResource {
 
     @GET
     @Timed
-    public SendData sendHello(@QueryParam("name") Optional<String> name) throws SQLException {
-//        final String value = String.format(template, name.orElse(defaultName));
-        final String value = String.format(template, GetDomains.getAllDomains());
-        return new SendData(counter.incrementAndGet(), value);
+    public SendData sendData(@QueryParam("name") Optional<String> name) throws SQLException {
+        if (!name.isPresent()) {
+            return new SendData(counter.incrementAndGet(), GetDomains.getDomain());
+        } else {
+            return new SendData(counter.incrementAndGet(), GetDomains.getDomain(name.orElse("")));}
     }
-
 }
