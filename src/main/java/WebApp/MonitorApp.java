@@ -25,11 +25,16 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
 
     @Override
     public void run(MonitorAppConfiguration monitorAppConfiguration, Environment environment) {
-        final MonitorAppResource resource = new MonitorAppResource(
+        final MonitorAppDomains resource = new MonitorAppDomains(
+                monitorAppConfiguration.getTemplate(),
+                monitorAppConfiguration.getDefaultName()
+        );
+        final MonitorAppAgents resource1 = new MonitorAppAgents(
                 monitorAppConfiguration.getTemplate(),
                 monitorAppConfiguration.getDefaultName()
         );
         environment.jersey().register(resource);
+        environment.jersey().register(resource1);
 
     }
 }
