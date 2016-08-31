@@ -1,5 +1,5 @@
 $.ajax({
-    url: '/domains',
+    url: '/domains?name=global-8000.com',
     type: "GET",
     dataType: "JSON",
     success: function(data) {

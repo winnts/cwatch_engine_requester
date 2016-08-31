@@ -40,7 +40,7 @@ public class GetAgentsHosts {
                 + Agents.TABLE+"."+Agents.FIELD_HOST_ID
                 + " FROM " + Agents.TABLE + innerJoin + Hosts.TABLE
                 + " ON " + Agents.TABLE + "." + Agents.FIELD_HOST_ID + "=" + Hosts.TABLE+"."+Hosts.FIELD_ID
-                + ";");
+                + " ORDER BY " + Agents.TABLE+"."+Agents.FIELD_ID +";");
         return collectFields(rs);
     }
 

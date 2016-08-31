@@ -43,6 +43,12 @@ public class GetLicensesPermits {
         return collectFields(rs);
     }
 
+    public static List<LicensesPermits> requestLicensesPerDomainAndHost(Integer hostId) throws SQLException{
+        ResultSet rs = GetPostgresConn.statement().executeQuery(selectAll + LicensesPermits.TABLE +
+                where + LicensesPermits.FIELD_CLIENTABLE_TYPE + "=" + "\'Domain\'" + " AND " + ";");
+        return collectFields(rs);
+    }
+
     public static void main(String[] args) throws SQLException {
         LicensesAndDomains.getLicensesAll(requestLicensesPerDomain());
     }

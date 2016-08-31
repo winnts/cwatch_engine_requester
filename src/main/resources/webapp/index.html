@@ -23,38 +23,81 @@
                             <th>#</th>
                             <th>Hostname</th>
                             <th>IP</th>
+                            <th>Version</th>
                             <th>Status</th>
                             <th>Last seen</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <script src="getAgents.js"></script>
+                        <tbody id="agentsBody">
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-2">
             <div class="panel panel-success">
-                <div class="panel-heading">Domains on hosts</div>
-            <div class="panel-body"><table class="table table-hover" id="domains">
+                <div class="panel-heading" id="appPanel">Apps on </div>
+            <div class="panel-body"><table class="table table-hover" id="applications">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Domain</th>
-                    <th>Dir</th>
+                    <th>Name</th>
+                    <th>Version</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <script src="getDomains.js"></script>
                 </tbody>
-            </table></div>
-    </div>
-
+            </table>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">Licenses on host</div>
+                <div class="panel-body"><table class="table table-hover" id="licenses">
+                    <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>License key</th>
+                        <th>Product</th>
+                        <th>Status</th>
+                        <th>Expired at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>coolkodi.com</td>
+                        <td>70be022e-6318-44c1-9e82-cd3763fd22fc</td>
+                        <td>capt.domain.protected</td>
+                        <td>1</td>
+                        <td>2017-08-09 07:38:00.0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script type = "text/javascript" src="getAgents.js"></script>
+<script type = "text/javascript" src="getApplications.js"></script>
+<!--<script src="getDomains.js"></script>-->
+<script type="text/javascript">
+    tableAgents();
+    var myTimer = setInterval(tableAgents, 10000);
 
+    var myTableTimer = setInterval(function (){
+    var table = document.getElementById("agents");
+    if (table != null) {
+        for (var i = 1; i < table.rows.length; i++) {
+            for (var j = 0; j < table.rows[i].cells.length; j++)
+            table.rows[i].onclick = function () {
+                tableApplications(this.cells[0].innerHTML, this.cells[1].innerHTML);
+            };
+        }
+    }
+    }, 1000);
 
+</script>
 </body>
 </html>

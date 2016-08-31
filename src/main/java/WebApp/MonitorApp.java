@@ -33,8 +33,13 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
                 monitorAppConfiguration.getTemplate(),
                 monitorAppConfiguration.getDefaultName()
         );
+        final MonitorAppApplications resource2 = new MonitorAppApplications(
+                monitorAppConfiguration.getTemplate(),
+                monitorAppConfiguration.getDefaultName()
+        );
         environment.jersey().register(resource);
         environment.jersey().register(resource1);
+        environment.jersey().register(resource2);
 
     }
 }
