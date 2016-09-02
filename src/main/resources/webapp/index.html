@@ -11,6 +11,8 @@
     <!--<link rel="stylesheet" type="text/css" href="style.css">-->
 </head>
 
+<h6>
+<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4" style="background-color:white;">
@@ -53,7 +55,7 @@
         </div>
         <div class="col-md-6">
             <div class="panel panel-info">
-                <div class="panel-heading">Licenses on host</div>
+                <div class="panel-heading" id="licPanel">Licenses on host</div>
                 <div class="panel-body"><table class="table table-hover" id="licenses">
                     <thead>
                     <tr>
@@ -65,13 +67,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>coolkodi.com</td>
-                        <td>70be022e-6318-44c1-9e82-cd3763fd22fc</td>
-                        <td>capt.domain.protected</td>
-                        <td>1</td>
-                        <td>2017-08-09 07:38:00.0</td>
-                    </tr>
                     </tbody>
                 </table>
                 </div>
@@ -79,24 +74,32 @@
         </div>
     </div>
 </div>
+</h6>
 <script type = "text/javascript" src="getAgents.js"></script>
 <script type = "text/javascript" src="getApplications.js"></script>
+<script type = "text/javascript" src="getLicByHost.js"></script>
 <!--<script src="getDomains.js"></script>-->
 <script type="text/javascript">
-    tableAgents();
-    var myTimer = setInterval(tableAgents, 10000);
+    var appHostId;
+    var appHostName;
 
+    tableAgents();
+    var myTimer = setInterval(tableAgents, 30000);
     var myTableTimer = setInterval(function (){
     var table = document.getElementById("agents");
     if (table != null) {
         for (var i = 1; i < table.rows.length; i++) {
             for (var j = 0; j < table.rows[i].cells.length; j++)
             table.rows[i].onclick = function () {
-                tableApplications(this.cells[0].innerHTML, this.cells[1].innerHTML);
+                appHostId = this.cells[0].innerHTML;
+                appHostName = this.cells[1].innerHTML;
+                tableApplications(appHostId, appHostName);
+                tableLicenses(appHostId, appHostName);
             };
         }
     }
     }, 1000);
+    var appTimer = setInterval(function () {tableApplications(appHostId, appHostName)}, 15000);
 
 </script>
 </body>

@@ -15,7 +15,7 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
 
     @Override
     public String getName() {
-        return "hello";
+        return "MonitorApp";
     }
 
     @Override
@@ -37,9 +37,14 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
                 monitorAppConfiguration.getTemplate(),
                 monitorAppConfiguration.getDefaultName()
         );
+        final MonitorAppLicByHost resource3 = new MonitorAppLicByHost(
+                monitorAppConfiguration.getTemplate(),
+                monitorAppConfiguration.getDefaultName()
+        );
         environment.jersey().register(resource);
         environment.jersey().register(resource1);
         environment.jersey().register(resource2);
+        environment.jersey().register(resource3);
 
     }
 }

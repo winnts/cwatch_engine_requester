@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,14 @@ public class InsecurePermsReport {
             try {
                 domainName = reputation.getString("domain");
                 System.out.println("DOMAIN: " + domainName);
+                Long timeFromJSON = reputation.getLong("last_scan_date");
+
+//                Timestamp timestamp = new Timestamp(timeFromJSON);
+//                System.out.println(timestamp);
+                Date getDate = new Date(timeFromJSON * 1000);
+
+                System.out.println("Last scan date: " + getDate);
+
                 System.out.println("SUSPICIOUS FILES:");
                 suspicious = reputation.getJSONObject("scanned_files_suspicious").getJSONArray("files");
                 Integer suspicious_count = 0;
@@ -40,7 +49,10 @@ public class InsecurePermsReport {
                 }
                 System.out.println("Malicious files found: " + malicious_count);
                 System.out.println("##########################################");
-            } catch (JSONException e){}
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+            }
         }
     }
 }

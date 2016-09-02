@@ -29,8 +29,6 @@ function drawRowAgents(rowDataAgents) {
     lastSeenString = lastSeen.getHours() + ":" + lastSeen.getMinutes() +
                         " " + lastSeen.getDate()+"/"+lastSeen.getMonth()+"/"+lastSeen.getFullYear();
 
-//    console.log (nowDate.getHours() + ":" + nowDate.getMinutes() +
-//                                         " " + nowDate.getDate()+"/"+nowDate.getMonth()+"/"+nowDate.getFullYear())
     var rowAgents = $("<tr />");
 
     $("#agents").append(rowAgents);
