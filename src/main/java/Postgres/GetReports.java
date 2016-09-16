@@ -137,9 +137,9 @@ public class GetReports {
 //        MalwareReport.getMalware(requestMalware());
 //        InjectedReport.getInjected(requestInjected());
 //        GetPostgresConn.statement().close();
-        InsecurePermsReport.getInsecurePerms(requestIsecurePerms());
+//        InsecurePermsReport.getInsecurePerms(requestIsecurePerms());
 //        getFullReportByDomainName("gumblar.cn");
-//        SslReport.getSSLIssues(requestSSLIssues());
+        SslReport.getSSLIssues(requestSSLIssues());
 
     }
 }
