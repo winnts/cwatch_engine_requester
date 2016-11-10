@@ -14,7 +14,6 @@ public class AgentsHosts {
     public static final String FIELD_UPDATED_AT = "updated_at";
     public static final String FIELD_HOST_ID = "host_id";
 
-
     public Integer id;
     public String hostname;
     public String version;

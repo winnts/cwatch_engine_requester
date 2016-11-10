@@ -11,5 +11,9 @@ public class DbConst {
     public static final String isTrue = "TRUE";
     public static final String like = " LIKE ";
     public static final String innerJoin = " INNER JOIN ";
+    public static final String on = " ON ";
+    public static final String from = " FROM ";
+    public static final String and = " AND ";
+    public static final String orderBy = " ORDER BY ";
 
 }

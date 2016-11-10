@@ -1,6 +1,6 @@
 package WebApp;
 
-import Postgres.Reports.LicensesAndDomains;
+import Postgres.Reports.GetLicensesByHost;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;
@@ -10,8 +10,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static Postgres.GetLicensesPermits.requestLicensesPerDomainAndHost;
 
 /**
  * Created by adyachenko on 29.08.16.
@@ -32,7 +30,7 @@ public class MonitorAppLicByHost {
     @GET
     @Timed
     public SendLicByHost sendData(@QueryParam("host_id") Integer host_id) throws SQLException {
-        return new SendLicByHost(counter.incrementAndGet(), LicensesAndDomains.getLicensesAll(requestLicensesPerDomainAndHost(host_id)));
+        return new SendLicByHost(counter.incrementAndGet(), GetLicensesByHost.getLicensesByHosts(host_id));
     }
 
 }

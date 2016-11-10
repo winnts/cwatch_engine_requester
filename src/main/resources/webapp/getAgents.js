@@ -23,7 +23,7 @@ function drawRowAgents(rowDataAgents) {
     var status = "<font color=\"green\">ONLINE</font>";
     var lastSeen = new Date(rowDataAgents.updated_at);
     var nowDate = new Date();
-    nowDate.setMinutes(nowDate.getMinutes() - 30);
+    nowDate.setMinutes(nowDate.getMinutes() - 90);
     nowDate.setHours(nowDate.getUTCHours());
     if (lastSeen < nowDate) {status = "<font color=\"red\">OFFLINE</font>"};
     lastSeenString = lastSeen.getHours() + ":" + lastSeen.getMinutes() +
@@ -32,7 +32,7 @@ function drawRowAgents(rowDataAgents) {
     var rowAgents = $("<tr />");
 
     $("#agents").append(rowAgents);
-    rowAgents.append($("<td>" + rowDataAgents.id + "</td>"));
+    rowAgents.append($("<td>" + rowDataAgents.host_id + "</td>"));
     rowAgents.append($("<td>" + rowDataAgents.hostname + "</td>"));
     rowAgents.append($("<td>" + rowDataAgents.public_ip + "</td>"));
     rowAgents.append($("<td>" + rowDataAgents.version + "</td>"));
