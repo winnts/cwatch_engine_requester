@@ -74,6 +74,30 @@
         </div>
     </div>
 </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Reputation and Scanning results for</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Reputation last scan: 16:25 20-11-2016</p>
+                    <p>SSL Issues: none</p>
+                    <p>Blacklisted: none</p>
+                    <p>WebInspector Scan: clear</p>
+                    <p>Files last scan: 15:10 20-11-2016</p>
+                    <p>Malware found: 0</p>
+                    <p>Injected code found: 0</p>
+                    <p>Insecure permissions: none</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </h6>
 <script type = "text/javascript" src="getAgents.js"></script>
 <script type = "text/javascript" src="getApplications.js"></script>
@@ -102,6 +126,24 @@
     var appTimer = setInterval(function () {tableApplications(appHostId, appHostName)}, 15000);
 </script>
 
+<script type="text/javascript">
+    var appDomainName;
+    var myDomainTableTimer = setInterval(function (){
+    var domainTable = document.getElementById("licenses");
+    if (domainTable != null) {
+        for (var i = 1; i < domainTable.rows.length; i++) {
+            for (var j = 0; j < domainTable.rows[i].cells.length; j++)
+            domainTable.rows[i].onclick = function () {
+                appDomainName = this.cells[0].innerHTML;
+                <!--appHostName = this.cells[1].innerHTML;-->
+                <!--tableApplications(appHostId, appHostName);-->
+                <!--tableLicenses(appHostId, appHostName);-->
+                $('#myModal').modal('show');
+            };
+        }
+    }
+    }, 1000);
+</script>
 
 </body>
 </html>
