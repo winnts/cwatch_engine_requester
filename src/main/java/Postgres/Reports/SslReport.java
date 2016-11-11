@@ -4,6 +4,7 @@ import Postgres.Entity.Reports;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,5 +26,16 @@ public class SslReport {
                 System.out.println("##########################################");
             } catch (JSONException e) {}
         }
+    }
+    public static Date getSSLScanDate(List<Reports> reportsList){
+        Date sslScanDate = null;
+        for (Reports reports : reportsList) {
+            JSONObject reputationDescription = new JSONObject(reports.getFieldReputationDescription);
+            try {
+                Long timeFromJSON = reputationDescription.getLong("last_scan_date");
+                sslScanDate = new Date(timeFromJSON * 1000);
+            } catch (JSONException e) {}
+        }
+        return sslScanDate;
     }
 }
