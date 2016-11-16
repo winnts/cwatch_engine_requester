@@ -10,99 +10,158 @@
     <title>MonitorApp</title>
     <!--<link rel="stylesheet" type="text/css" href="style.css">-->
 </head>
+<body>
 
-<h6>
-<br>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4" style="background-color:white;">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Agents state</div>
-                <div class="panel-body">
-                    <table class="table table-hover" id="agents">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Hostname</th>
-                            <th>IP</th>
-                            <th>Version</th>
-                            <th>Status</th>
-                            <th>Last seen</th>
-                        </tr>
-                        </thead>
-                        <tbody id="agentsBody">
-                        </tbody>
-                    </table>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+        <li><a data-toggle="tab" href="#reports">Reports</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="main" class="tab-pane fade in active">
+            <h6>
+                <br>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4" style="background-color:white;">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Agents state</div>
+                                <div class="panel-body">
+                                    <table class="table table-condensed" id="agents">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Hostname</th>
+                                            <th>IP</th>
+                                            <th>Version</th>
+                                            <th>Status</th>
+                                            <th>Last seen</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="agentsBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" id="appPanel">Apps on</div>
+                                <div class="panel-body">
+                                    <table class="table table-hover" id="applications">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Version</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-info">
+                                <div class="panel-heading" id="licPanel">Licenses on host</div>
+                                <div class="panel-body">
+                                    <table class="table table-hover" id="licenses">
+                                        <thead>
+                                        <tr>
+                                            <th>Domain</th>
+                                            <th>License key</th>
+                                            <th>Product</th>
+                                            <th>Status</th>
+                                            <th>Expired at</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="panel panel-success">
-                <div class="panel-heading" id="appPanel">Apps on </div>
-            <div class="panel-body"><table class="table table-hover" id="applications">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Version</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading" id="licPanel">Licenses on host</div>
-                <div class="panel-body"><table class="table table-hover" id="licenses">
-                    <thead>
-                    <tr>
-                        <th>Domain</th>
-                        <th>License key</th>
-                        <th>Product</th>
-                        <th>Status</th>
-                        <th>Expired at</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="modal fade" id="repAndScans" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title" id="repandscanTitle">Reputation and Scanning results for</h4>
+                            </div>
+                            <div class="modal-body" id="modalBody">
+                                <p id="repscandate">Reputation last scan: </p>
+                                <p id="sslissues">SSL Issues: </p>
+                                <p id="isblacklisted">Blacklisted: </p>
+                                <p id="webinspector">WebInspector Scan: </p>
+                                <p id="malwarescandate">Files last scan: </p>
+                                <p id="ismalware">Malware found: </p>
+                                <p id="isinjectedcode">Injected code found: </p>
+                                <p id="isinsecureperms">Insecure permissions: </p>
+                                <br>
+                                <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">Whitelisted IP's</div>
+                                            <div class="panel-body">
+                                                <table class="table table-hover" id="ipWhite">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>IP</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="panel panel-danger">
+                                            <div class="panel-heading">Blacklisted IP's</div>
+                                            <div class="panel-body">
+                                                <table class="table table-hover" id="ipBlack">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>IP</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
+            </h6>
+        </div>
+        <div id="reports" class="tab-pane fade">
+            <br>
+            <p>All Reports</p>
         </div>
     </div>
 </div>
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Reputation and Scanning results for</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Reputation last scan: 16:25 20-11-2016</p>
-                    <p>SSL Issues: none</p>
-                    <p>Blacklisted: none</p>
-                    <p>WebInspector Scan: clear</p>
-                    <p>Files last scan: 15:10 20-11-2016</p>
-                    <p>Malware found: 0</p>
-                    <p>Injected code found: 0</p>
-                    <p>Insecure permissions: none</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
 
-        </div>
-    </div>
-</h6>
-<script type = "text/javascript" src="getAgents.js"></script>
-<script type = "text/javascript" src="getApplications.js"></script>
-<script type = "text/javascript" src="getLicByHost.js"></script>
-<!--<script src="getDomains.js"></script>-->
+
+<script type="text/javascript" src="getAgents.js"></script>
+<script type="text/javascript" src="getApplications.js"></script>
+<script type="text/javascript" src="getLicByHost.js"></script>
+<script type="text/javascript" src="getRepAndScans.js"></script>
 <script type="text/javascript">
     var appHostId;
     var appHostName;
@@ -124,6 +183,7 @@
     }
     }, 1000);
     var appTimer = setInterval(function () {tableApplications(appHostId, appHostName)}, 15000);
+
 </script>
 
 <script type="text/javascript">
@@ -138,11 +198,13 @@
                 <!--appHostName = this.cells[1].innerHTML;-->
                 <!--tableApplications(appHostId, appHostName);-->
                 <!--tableLicenses(appHostId, appHostName);-->
-                $('#myModal').modal('show');
+                $('#repAndScans').modal('show');
+                modalRepAndScans(appDomainName);
             };
         }
     }
     }, 1000);
+
 </script>
 
 </body>

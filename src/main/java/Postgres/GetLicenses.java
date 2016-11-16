@@ -23,7 +23,7 @@ public class GetLicenses {
     public static String LICENSE_FULLY_MANAGEMENT = "capt.domainfully.management";
 
     public static List<Licenses> collectFields(String sql) throws SQLException {
-        List<Licenses> ret = new ArrayList<Licenses>();
+        List<Licenses> ret = new ArrayList<>();
         try (Connection conn = GetPostgresConn.connect();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             try (ResultSet rs = ps.executeQuery()) {

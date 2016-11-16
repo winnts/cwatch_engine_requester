@@ -38,4 +38,7 @@ public class SslReport {
         }
         return sslScanDate;
     }
+    public static Boolean getSSLStatus (List<Reports> reportsList){
+        return reportsList.get(0).getFieldSslIssues;
+    }
 }

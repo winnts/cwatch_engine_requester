@@ -25,4 +25,7 @@ public class BlacklistedReport {
             } catch (JSONException e) {}
         }
     }
+    public static Boolean getBlacklistedStatus (List<Reports> reportsList){
+        return reportsList.get(0).getFieldIsBlacklisted;
+    }
 }

@@ -25,4 +25,5 @@ public class PhishingReport {
             } catch (JSONException e) {}
         }
     }
+
 }

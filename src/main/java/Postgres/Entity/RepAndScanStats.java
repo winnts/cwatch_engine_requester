@@ -1,6 +1,6 @@
 package Postgres.Entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by adyachenko on 11.11.16.
@@ -22,15 +22,19 @@ public class RepAndScanStats {
     public Boolean malware_detected;
     public Boolean injected_code_found;
     public Boolean insecure_permissions;
-    public Date reputation_last_scan_date;
-    public Date malware_last_scan_date;
+    public Timestamp reputation_last_scan_date;
+    public Timestamp malware_last_scan_date;
 
-    public RepAndScanStats(Boolean ssl_issues, Boolean is_blacklisted, Boolean phishing_detected, Boolean malware_detected, Boolean injected_code_found, Boolean insecure_permissions) {
+    public RepAndScanStats(Boolean ssl_issues, Boolean is_blacklisted, Boolean phishing_detected, Boolean malware_detected,
+                           Boolean injected_code_found, Boolean insecure_permissions, Timestamp reputation_last_scan_date,
+                           Timestamp malware_last_scan_date) {
         this.ssl_issues = ssl_issues;
         this.is_blacklisted = is_blacklisted;
         this.phishing_detected = phishing_detected;
         this.malware_detected = malware_detected;
         this.injected_code_found = injected_code_found;
         this.insecure_permissions = insecure_permissions;
+        this.reputation_last_scan_date = reputation_last_scan_date;
+        this.malware_last_scan_date = malware_last_scan_date;
     }
 }

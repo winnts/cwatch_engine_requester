@@ -26,8 +26,7 @@ function drawRowAgents(rowDataAgents) {
     nowDate.setMinutes(nowDate.getMinutes() - 90);
     nowDate.setHours(nowDate.getUTCHours());
     if (lastSeen < nowDate) {status = "<font color=\"red\">OFFLINE</font>"};
-    lastSeenString = lastSeen.getHours() + ":" + lastSeen.getMinutes() +
-                        " " + lastSeen.getDate()+"/"+lastSeen.getMonth()+"/"+lastSeen.getFullYear();
+    lastSeenString = formatDateString(lastSeen);
 
     var rowAgents = $("<tr />");
 
