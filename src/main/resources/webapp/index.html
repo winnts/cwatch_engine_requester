@@ -7,15 +7,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Bootstrap/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+    <script src="Bootstrap/js/bootstrap-formhelpers.js"></script>
     <title>MonitorApp</title>
     <!--<link rel="stylesheet" type="text/css" href="style.css">-->
 </head>
 <body>
-
+<p id="header"><h2>#  cWatch Web Monitor v.1.0.23 (Production)</h2></p>
 <div class="container-fluid">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
         <li><a data-toggle="tab" href="#reports">Reports</a></li>
+        <li><a data-toggle="tab" href="#options">Options</a></li>
+
     </ul>
     <div class="tab-content">
         <div id="main" class="tab-pane fade in active">
@@ -108,7 +112,7 @@
                                         <div class="panel panel-success">
                                             <div class="panel-heading">Whitelisted IP's</div>
                                             <div class="panel-body">
-                                                <table class="table table-hover" id="ipWhite">
+                                                <table class="table table-hover" id="ipWhiteList">
                                                     <thead>
                                                     <tr>
                                                         <th>IP</th>
@@ -124,7 +128,7 @@
                                         <div class="panel panel-danger">
                                             <div class="panel-heading">Blacklisted IP's</div>
                                             <div class="panel-body">
-                                                <table class="table table-hover" id="ipBlack">
+                                                <table class="table table-hover" id="ipBlackList">
                                                     <thead>
                                                     <tr>
                                                         <th>IP</th>
@@ -154,14 +158,35 @@
             <br>
             <p>All Reports</p>
         </div>
+        <div id="options" class="tab-pane fade">
+            <br>
+            <div class="container-fluid">
+                <div class="col-md-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Connection options</div>
+                        <div class="panel-body">
+                            <div class="bfh-selectbox" data-name="selectConnection" id="envSelection" data-value="prod">
+                                <div data-value="prod">Production</div>
+                                <div data-value="pre_prod">Stage</div>
+                            </div>
+                            <div align="right">
+                            <button type="button" class="btn btn-success" onclick="switchEnv()">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
+<script type="text/javascript" src="dateFormatter.js"></script>
 <script type="text/javascript" src="getAgents.js"></script>
 <script type="text/javascript" src="getApplications.js"></script>
 <script type="text/javascript" src="getLicByHost.js"></script>
 <script type="text/javascript" src="getRepAndScans.js"></script>
+<script type="text/javascript" src="getWaf.js"></script>
+<script type="text/javascript" src="sendOptions.js"></script>
 <script type="text/javascript">
     var appHostId;
     var appHostName;
@@ -195,11 +220,9 @@
             for (var j = 0; j < domainTable.rows[i].cells.length; j++)
             domainTable.rows[i].onclick = function () {
                 appDomainName = this.cells[0].innerHTML;
-                <!--appHostName = this.cells[1].innerHTML;-->
-                <!--tableApplications(appHostId, appHostName);-->
-                <!--tableLicenses(appHostId, appHostName);-->
                 $('#repAndScans').modal('show');
                 modalRepAndScans(appDomainName);
+                tableWaf(appDomainName);
             };
         }
     }

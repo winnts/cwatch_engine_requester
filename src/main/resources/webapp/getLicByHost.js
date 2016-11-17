@@ -23,8 +23,6 @@ function drawRowLicenses(rowDataLicenses) {
     var licStatus = "<font color=\"green\">OK</font>";
     if (rowDataLicenses.license_status_id==0) {licStatus = "<font color=\"red\">EXPIRED</font>"};
     var expired = new Date(rowDataLicenses.expired_at);
-//    expiredString = expired.getHours() + ":" + expired.getMinutes() +
-//                        " " + expired.getDate()+"/"+expired.getMonth()+"/"+expired.getFullYear();
 
     expiredString = expired.getDate()+"/"+expired.getMonth()+"/"+expired.getFullYear();
 

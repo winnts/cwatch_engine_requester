@@ -5,13 +5,14 @@ import Postgres.Constants.PostgresStage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * Created by adyachenko on 15.08.16.
  */
 public class GetPostgresConn {
 
-    static String selectConnection = "prod";
+    public static String selectConnection = "prod";
 
     public static Connection connect() {
         String db_addr = null;
@@ -45,6 +46,10 @@ public class GetPostgresConn {
             System.exit(0);
         }
         return postgresConn;
+    }
+
+    public static void close() throws SQLException {
+        GetPostgresConn.connect().close();
     }
 
 }

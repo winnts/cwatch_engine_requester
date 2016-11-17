@@ -1,7 +1,9 @@
-package Postgres.Reports;
+package Postgres;
 
-import Postgres.Entity.*;
-import Postgres.GetPostgresConn;
+import Postgres.Entity.Domains;
+import Postgres.Entity.Licenses;
+import Postgres.Entity.LicensesByHost;
+import Postgres.Entity.LicensesPermits;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

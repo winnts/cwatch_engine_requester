@@ -27,10 +27,6 @@ function getFontColor(status) {
     if (status==true){colorType="<font color=\"red\">"};
     return colorType;
 }
-function formatDateString(dateString){
-    return formattedDateString = dateString.getHours() + ":" + ("0"+dateString.getMinutes()).substr(-2)+ " "+dateString.getDate()+"/"+
-                            (dateString.getMonth()+1)+"/"+dateString.getFullYear();
-}
 
 function drawModalRepAndScans(repandscansInfo, domain_name) {
     for (var i = 0; i < repandscansInfo.length; i++) {

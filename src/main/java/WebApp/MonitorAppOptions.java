@@ -1,36 +1,39 @@
 package WebApp;
 
-import Postgres.GetLicensesByHost;
+import Postgres.GetPostgresConn;
 import com.codahale.metrics.annotation.Timed;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by adyachenko on 29.08.16.
  */
-@Path("/lbh")
+@Path("/options")
 @Produces(MediaType.APPLICATION_JSON)
-public class MonitorAppLicByHost {
+public class MonitorAppOptions {
     private final String template;
     private final String defaultName;
     private final AtomicLong counter;
 
-    public MonitorAppLicByHost(String template, String defaultName){
+    public MonitorAppOptions(String template, String defaultName){
         this.template = template;
         this.defaultName = defaultName;
         this.counter = new AtomicLong();
     }
 
-    @GET
+    @POST
     @Timed
-    public SendLicByHost sendData(@QueryParam("host_id") Integer host_id) throws SQLException {
-        return new SendLicByHost(counter.incrementAndGet(), GetLicensesByHost.getLicensesByHosts(host_id));
+    public void switchEnv(@QueryParam("env") String env) throws IOException, SQLException {
+        System.out.println("Get from UI: " + env);
+        GetPostgresConn.close();
+        GetPostgresConn.selectConnection = env;
+        System.out.println(GetPostgresConn.selectConnection);
     }
-
 }

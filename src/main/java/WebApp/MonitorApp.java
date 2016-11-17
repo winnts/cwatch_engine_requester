@@ -21,7 +21,9 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
     @Override
     public void initialize (Bootstrap<MonitorAppConfiguration> bootstrap){
         bootstrap.addBundle(new AssetsBundle("/webapp", "/app"));
+
     }
+
 
     @Override
     public void run(MonitorAppConfiguration monitorAppConfiguration, Environment environment) {
@@ -45,11 +47,21 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
                 monitorAppConfiguration.getTemplate(),
                 monitorAppConfiguration.getDefaultName()
         );
+        final MonitorAppWaf resource5 = new MonitorAppWaf(
+                monitorAppConfiguration.getTemplate(),
+                monitorAppConfiguration.getDefaultName()
+        );
+        final MonitorAppOptions resource6 = new MonitorAppOptions(
+                monitorAppConfiguration.getTemplate(),
+                monitorAppConfiguration.getDefaultName()
+        );
         environment.jersey().register(resource);
         environment.jersey().register(resource1);
         environment.jersey().register(resource2);
         environment.jersey().register(resource3);
         environment.jersey().register(resource4);
+        environment.jersey().register(resource5);
+        environment.jersey().register(resource6);
 
     }
 }
