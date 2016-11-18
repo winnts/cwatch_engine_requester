@@ -1,5 +1,6 @@
 function modalRepAndScans(domain_name) {
 //###Clear Modal Box first
+    $("#domainid").html('Domain ID: ');
     $("#repscandate").html('Reputation last scan: ');
     $("#repandscanTitle").html('Reputation and Scanning results for: '+domain_name);
     $("#sslissues").html('SSL Issues: ')
@@ -32,6 +33,7 @@ function drawModalRepAndScans(repandscansInfo, domain_name) {
     for (var i = 0; i < repandscansInfo.length; i++) {
         var sslDate = new Date(repandscansInfo[i].reputation_last_scan_date)
         var malwareDate = new Date(repandscansInfo[i].malware_last_scan_date)
+        $("#domainid").html('Domain ID: ' + '<b>' + repandscansInfo[i].domain_id + '</b>');
         $("#repscandate").html('Reputation last scan: ' + '<b>' + formatDateString(sslDate) + '</b>')
         $("#sslissues").html('SSL Issues: ' +getFontColor(repandscansInfo[i].ssl_issues)+'<b>' +repandscansInfo[i].ssl_issues+'</b>'+'</font>')
         $("#isblacklisted").html('Blacklisted: '+getFontColor(repandscansInfo[i].is_blacklisted) +'<b>'+repandscansInfo[i].is_blacklisted+'</b>'+'</font>')

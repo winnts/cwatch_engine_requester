@@ -22,7 +22,7 @@ public class GetRepAndScanStats {
             JSONObject reputationDescription = new JSONObject(report.getFieldReputationDescription);
             Date sslScanDate = new Date(reputationDescription.getLong("last_scan_date")*1000);
             Date malwareScanDate = new Date(malwareDescription.getLong("last_scan_date")*1000);
-            rep.add(new RepAndScanStats(report.getFieldSslIssues, report.getFieldIsBlacklisted, report.getFieldPhishingDetected,
+            rep.add(new RepAndScanStats(report.getFieldDomain_id, report.getFieldSslIssues, report.getFieldIsBlacklisted, report.getFieldPhishingDetected,
                     report.getFieldMalwareDetected, report.getFieldInjectedCodeFound, report.getFieldInsecurePermissions,
                     new Timestamp(sslScanDate.getTime()), new Timestamp(malwareScanDate.getTime())));
         }

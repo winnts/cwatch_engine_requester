@@ -38,7 +38,6 @@ public class GetPostgresConn {
                 pass = PostgresProd.pass;
                 break;
         }
-
         try {
             Class.forName("org.postgresql.Driver");
             postgresConn = DriverManager.getConnection("jdbc:postgresql://"+db_addr+":"+db_port+"/"+db_name,
@@ -54,5 +53,4 @@ public class GetPostgresConn {
     public static void close() throws SQLException {
         GetPostgresConn.connect().close();
     }
-
 }
