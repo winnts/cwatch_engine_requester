@@ -9,6 +9,7 @@ import io.dropwizard.setup.Environment;
  * Created by adyachenko on 29.08.16.
  */
 public class MonitorApp extends Application <MonitorAppConfiguration> {
+    public static MonitorAppConfiguration config;
     public static void main(String[] args) throws Exception{
         new MonitorApp().run(args);
     }
@@ -27,6 +28,7 @@ public class MonitorApp extends Application <MonitorAppConfiguration> {
 
     @Override
     public void run(MonitorAppConfiguration monitorAppConfiguration, Environment environment) {
+        config = monitorAppConfiguration;
         final MonitorAppDomains resource = new MonitorAppDomains(
                 monitorAppConfiguration.getTemplate(),
                 monitorAppConfiguration.getDefaultName()

@@ -1,6 +1,5 @@
 package WebApp;
 
-import Postgres.GetPostgresConn;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.POST;
@@ -32,8 +31,8 @@ public class MonitorAppOptions {
     @Timed
     public void switchEnv(@QueryParam("env") String env) throws IOException, SQLException {
         System.out.println("Get from UI: " + env);
-        GetPostgresConn.close();
-        GetPostgresConn.selectConnection = env;
-        System.out.println(GetPostgresConn.selectConnection);
+//        GetPostgresConn.close();
+//        GetPostgresConn.selectConnection = env;
+//        System.out.println(GetPostgresConn.selectConnection);
     }
 }

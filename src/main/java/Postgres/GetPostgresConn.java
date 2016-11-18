@@ -2,6 +2,7 @@ package Postgres;
 
 import Postgres.Constants.PostgresProd;
 import Postgres.Constants.PostgresStage;
+import WebApp.MonitorApp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
  */
 public class GetPostgresConn {
 
-    public static String selectConnection = "prod";
+    public static String selectConnection = MonitorApp.config.getConnection();
 
     public static Connection connect() {
         String db_addr = null;
@@ -21,19 +22,21 @@ public class GetPostgresConn {
         String user = null;
         String pass = null;
         Connection postgresConn = null;
-        if (selectConnection == "pre_prod") {
-            db_addr = PostgresStage.db_addr;
-            db_port = PostgresStage.db_port;
-            db_name = PostgresStage.db_name;
-            user = PostgresStage.user;
-            pass = PostgresStage.pass;
-        }
-        if (selectConnection == "prod") {
-            db_addr = PostgresProd.db_addr;
-            db_port = PostgresProd.db_port;
-            db_name = PostgresProd.db_name;
-            user = PostgresProd.user;
-            pass = PostgresProd.pass;
+        switch (selectConnection) {
+            case "pre_prod":
+                db_addr = PostgresStage.db_addr;
+                db_port = PostgresStage.db_port;
+                db_name = PostgresStage.db_name;
+                user = PostgresStage.user;
+                pass = PostgresStage.pass;
+                break;
+            case "prod":
+                db_addr = PostgresProd.db_addr;
+                db_port = PostgresProd.db_port;
+                db_name = PostgresProd.db_name;
+                user = PostgresProd.user;
+                pass = PostgresProd.pass;
+                break;
         }
 
         try {

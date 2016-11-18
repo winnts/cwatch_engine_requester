@@ -19,6 +19,14 @@ public class MonitorAppConfiguration extends Configuration {
         return template;
     }
 
+    @NotEmpty
+    public String connection;
+
+
+    public String getConnection() {
+        return connection;
+    }
+
     @JsonProperty
     public void setTemplate(String template) {
         this.template = template;

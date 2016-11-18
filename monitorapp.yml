@@ -1,2 +1,3 @@
 template: '%s'
-defaultName: Peter
+defaultName: Monitor
+connection: prod
