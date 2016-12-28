@@ -1,6 +1,6 @@
 package WebApp;
 
-import Postgres.GetLicensesByHost;
+import Gets.GetLicensesByHost;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;

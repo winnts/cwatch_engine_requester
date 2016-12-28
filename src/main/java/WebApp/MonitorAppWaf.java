@@ -1,6 +1,6 @@
 package WebApp;
 
-import Postgres.GetWaf;
+import Gets.GetWaf;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;

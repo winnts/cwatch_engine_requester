@@ -1,8 +1,7 @@
 package WebApp;
 
-import Postgres.Entity.Applications;
+import Entity.Applications;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**

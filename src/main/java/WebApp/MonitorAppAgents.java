@@ -1,6 +1,6 @@
 package WebApp;
 
-import Postgres.GetAgentsHosts;
+import Gets.GetAgentsHosts;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;

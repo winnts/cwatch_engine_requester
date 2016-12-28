@@ -1,6 +1,6 @@
 package WebApp;
 
-import Postgres.GetDomains;
+import Gets.GetDomains;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;

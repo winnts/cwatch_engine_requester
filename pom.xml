@@ -6,11 +6,7 @@
     <groupId>space.dyachenko</groupId>
     <artifactId>monitor_app</artifactId>
     <version>1.0</version>
-    <!--<parent>-->
-    <!--<groupId>org.springframework.boot</groupId>-->
-    <!--<artifactId>spring-boot-starter-parent</artifactId>-->
-    <!--<version>1.4.0.RELEASE</version>-->
-    <!--</parent>-->
+
     <build>
         <plugins>
             <plugin>
@@ -83,7 +79,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -104,6 +99,11 @@
             <artifactId>dropwizard-assets</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>space.dyachenko</groupId>
+            <artifactId>engine.utils</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -111,6 +111,10 @@
             <name>Java.net Snapshot Repository for Maven</name>
             <url>https://maven.java.net/content/repositories/snapshots/</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <id>myMavenRepo.read</id>
+            <url>https://mymavenrepo.com/repo/MhahffVv7IJiIYMpGudh/</url>
         </repository>
     </repositories>
 

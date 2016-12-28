@@ -1,8 +1,7 @@
 package WebApp;
 
-import Postgres.Entity.Domains;
+import Entity.Domains;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**

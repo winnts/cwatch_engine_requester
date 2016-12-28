@@ -1,8 +1,7 @@
 package WebApp;
 
-import Postgres.Entity.RepAndScanStats;
+import Entity.RepAndScanStats;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**
